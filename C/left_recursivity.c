@@ -2,6 +2,8 @@
 #include<string.h>  
 #include <stdlib.h>
 #include <assert.h>
+#include <regex.h>
+
 
 #define MAX 100
 
@@ -46,6 +48,10 @@ int main () {
         }
         if(isLeftRecursive) {  // there is left recursivity
             printf(" est recursive a gauche.\n");  
+            if(m == 0){ // ma fammach Beta 
+                printf("Grammaire ne peut pas être réduit!\n");
+                continue;
+            }
             printf("%c->", non_terminal);
             for(int j=0; j < m; j++){
                 printf("%s%c\'", betas[j], non_terminal);

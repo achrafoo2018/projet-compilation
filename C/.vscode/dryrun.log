@@ -1,0 +1,8 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/kenzu/projet-compilation/C'
+cc -Wall -g    left_recursivity.c   -o left_recursivity
+cc -Wall -g    premier.c   -o premier
+cc -Wall -g    suivant.c   -o suivant
+cc -Wall -g    table_LL1.c   -o table_LL1
+make: Leaving directory '/home/kenzu/projet-compilation/C'
+ 
