@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri May  6 17:27:25 2022
+# Make data base, printed on Thu May  5 12:28:51 2022
 
 # Variables
 
@@ -15,7 +17,6 @@ GNUMAKEFLAGS :=
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
- 
 ?F = $(notdir $?)
 # environment
 DESKTOP_SESSION = ubuntu
@@ -38,7 +39,7 @@ GDMSESSION = ubuntu
 # environment
 XMODIFIERS = @im=ibus
 # makefile
-CURDIR := /home/kenzu/projet-compilation/C
+CURDIR := /home/kenzu/projet-compilation
 # makefile
 SHELL = /bin/sh
 # environment
@@ -46,13 +47,11 @@ VTE_VERSION = 6003
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 8:56710
-# makefile (from 'Makefile', line 1)
-CFLAGS := -Wall -g
+JOURNAL_STREAM = 8:59022
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
-# makefile (from 'Makefile', line 1)
-MAKEFILE_LIST :=  Makefile
+# makefile
+MAKEFILE_LIST := 
 # automatic
 @F = $(notdir $@)
 # environment
@@ -72,13 +71,13 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 _ = /usr/bin/code
 # environment
-MANAGERPID = 11970
+MANAGERPID = 31877
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
 LC_NAME = ar_TN.UTF-8
 # environment
-VSCODE_CWD = /home/kenzu/projet-compilation/C
+VSCODE_CWD = /home/kenzu/projet-compilation
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
@@ -86,7 +85,7 @@ PATH = /home/kenzu/anaconda3/condabin:/home/kenzu/.local/bin:/usr/local/sbin:/us
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/kenzu-X550JX:@/tmp/.ICE-unix/12340,unix/kenzu-X550JX:/tmp/.ICE-unix/12340
+SESSION_MANAGER = local/kenzu-X550JX:@/tmp/.ICE-unix/33813,unix/kenzu-X550JX:/tmp/.ICE-unix/33813
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -96,7 +95,7 @@ VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = dc1c57a30ca943ecbf49c060f354fbda
+INVOCATION_ID = 9df2829be6dc4b8db8672c28020b745b
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -114,11 +113,11 @@ CONDA_EXE = /home/kenzu/anaconda3/bin/conda
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-PWD = /home/kenzu/projet-compilation/C
+PWD = /home/kenzu/projet-compilation
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 12296
+SSH_AGENT_PID = 32064
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -162,7 +161,7 @@ SHLVL = 1
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-bfe150ab-d66e-42fe-afa5-e1f66977f1e0.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-f9942ee7-017c-4cbd-9dee-ca934b38d54e.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -170,7 +169,7 @@ USER = kenzu
 # environment
 LC_MONETARY = ar_TN.UTF-8
 # makefile
-.DEFAULT_GOAL := all
+.DEFAULT_GOAL := 
 # environment
 XDG_CURRENT_DESKTOP = Unity
 # automatic
@@ -182,7 +181,7 @@ CONDA_SHLVL = 0
 # default
 MAKE_COMMAND := make
 # environment
-OLDPWD = /home/kenzu/projet-compilation
+OLDPWD = /home/kenzu
 # default
 .VARIABLES := 
 # automatic
@@ -202,8 +201,6 @@ GDK_BACKEND = x11
 # environment
 LC_PAPER = ar_TN.UTF-8
 # environment
-LC_IDENTIFICATION = ar_TN.UTF-8
-# environment
 QT_ACCESSIBILITY = 1
 # environment
 DEFAULTS_PATH = /usr/share/gconf/ubuntu.default.path
@@ -220,26 +217,23 @@ LC_ALL = C
 # environment
 CONDA_PYTHON_EXE = /home/kenzu/anaconda3/bin/python
 # environment
-GJS_DEBUG_TOPICS = JS ERROR;JS LOG
-# environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/9948040c_1f2d_46c3_b8a2_583ba6ab614e
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/6c8de95f_e8bd_4442_97a8_f34480b41a83
 # automatic
 ^F = $(notdir $^)
 # environment
-GNOME_TERMINAL_SERVICE = :1.80
+GNOME_TERMINAL_SERVICE = :1.10858
 # default
 SUFFIXES := 
 # environment
 _CE_M = 
 # environment
 CHROME_DESKTOP = code-url-handler.desktop
- 
 # environment
 WINDOWPATH = 2
 # default
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
 # environment
-GJS_DEBUG_OUTPUT = stderr
+LC_IDENTIFICATION = ar_TN.UTF-8
 # default
 .RECIPEPREFIX := 
 # environment
@@ -249,11 +243,11 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 22419
+VSCODE_PID = 1133323
 # environment
 _CE_CONDA = 
 # variable set hash-table stats:
-# Load=120/1024=12%, Rehash=0, Collisions=19/145=13%
+# Load=117/1024=11%, Rehash=0, Collisions=18/139=13%
 
 # Pattern-specific Variable Values
 
@@ -261,9 +255,9 @@ _CE_CONDA =
 
 # Directories
 
-# . (device 2054, inode 6844933): 13 files, no impossibilities.
+# . (device 2054, inode 6844930): 9 files, no impossibilities.
 
-# 13 files, no impossibilities in 1 directories.
+# 9 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -272,79 +266,25 @@ _CE_CONDA =
 # Files
 
 # Not a target:
-suivant.c:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-all: left_recursivity premier suivant table_LL1
+all:
 #  Command line target.
 #  Implicit rule search has been done.
 #  File does not exist.
-#  File has been updated.
-#  Successfully updated.
-
-# Not a target:
-table_LL1:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-05 12:35:01.513628963
-#  File has been updated.
-#  Successfully updated.
-
-TLL1: table_LL1.c
-#  Implicit rule search has not been done.
-#  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 10):
-	gcc $(CFLAGS) table_LL1.c -o table_LL1
-
-# Not a target:
-left_recursivity:
-#  Implicit rule search has been done.
-#  Last modified 2022-04-25 15:02:07.636131577
-#  File has been updated.
-#  Successfully updated.
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-04-22 21:22:11.202511222
+#  File does not exist.
 #  File has been updated.
-#  Successfully updated.
+#  Failed to be updated.
 
 # Not a target:
-premier:
+makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-03 22:18:40.183666547
+#  File does not exist.
 #  File has been updated.
-#  Successfully updated.
-
-sv: suivant.c
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 8):
-	gcc $(CFLAGS) suivant.c -o suivant
-
-lr: left_recursivity.c
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 4):
-	gcc $(CFLAGS) left_recursivity.c -o left_recursivity
-
-pr: premier.c
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 6):
-	gcc $(CFLAGS) premier.c -o premier
-
-# Not a target:
-table_LL1.c:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Failed to be updated.
 
 # Not a target:
 .DEFAULT:
@@ -353,39 +293,27 @@ table_LL1.c:
 #  File has not been updated.
 
 # Not a target:
-left_recursivity.c:
- 
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-premier.c:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-suivant:
+GNUmakefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-03 22:18:40.255668961
+#  File does not exist.
 #  File has been updated.
-#  Successfully updated.
+#  Failed to be updated.
 
 # files hash-table stats:
-# Load=16/1024=2%, Rehash=0, Collisions=0/35=0%
+ 
+# Load=6/1024=1%, Rehash=0, Collisions=0/15=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 22 / storage = 189 B / avg = 8 B
-# current buf: size = 8162 B / used = 189 B / count = 22 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 17 / storage = 121 B / avg = 7 B
+# current buf: size = 8162 B / used = 121 B / count = 17 / avg = 7 B
 
-# strcache performance: lookups = 40 / hit rate = 45%
+# strcache performance: lookups = 20 / hit rate = 15%
 # hash-table stats:
-# Load=22/8192=0%, Rehash=0, Collisions=1/40=2%
-# Finished Make data base on Fri May  6 17:27:25 2022
+# Load=17/8192=0%, Rehash=0, Collisions=1/20=5%
+# Finished Make data base on Thu May  5 12:28:51 2022
 
  

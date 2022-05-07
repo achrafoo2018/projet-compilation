@@ -38,7 +38,7 @@ int main(int argc, char **argv){
 	// The Input grammar
     printf("Donner le nombre de production : ");  
     scanf("%d",&count);  
-    printf("Donner la grammaire comme suit : NT->..|... :\n");
+    printf("Donner la grammaire comme suit (epsilon = #) : NT->..|... :\n");
     int num = 0;
     for(int i=0;i<count;i++){  
         productions[i] = (char*)malloc(sizeof(char) * MAX);
@@ -127,6 +127,7 @@ void findfirst(char c, int q1, int q2){
 	// encounter a Terminal
 	if(!(isupper(c))) {
 		first[n++] = c;
+		return;
 	}
 	for(j = 0; j < count; j++){
 		if(production[j][0] == c){
