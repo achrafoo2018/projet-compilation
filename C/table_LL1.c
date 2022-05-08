@@ -138,7 +138,7 @@ int main(int argc,char **argv)
 	}
 	point1 = 0;
 	int land = 0;
-	for(e=0;e<count;e++){
+	for(e=0; e < count; e++){
 		ck=production[e][0];
 		point2 = 0;
 		flag = 0;
@@ -364,9 +364,9 @@ int main(int argc,char **argv)
 				printf("Dépilement\n");
 			}
 			else{
-				printf("\n\t===========================================================================\n");
-				printf("\t\t\t\tLe mot \033[1m'%s'\033[0m n'est pas accepté !!\n", input);
-				printf("\t===========================================================================\n\n\n");
+				printf("\n\t+=========================================================================+\n");
+				printf("\t|\t\t\tLe mot \033[1m'%s'\033[0m n'est pas accepté !!\t\t\t|\n", input);
+				printf("\t+=========================================================================+\n\n\n");
 				exit(0);
 			}
 		}
