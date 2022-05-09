@@ -8,24 +8,6 @@
 
 int in_array(char *, char, int);
 
-void affiche(char *terminals, int n){
-	printf("\n******************** Table LL1 *********************\n");
-    printf(" +--------+");
-	for(int i=0; i <= n; i++){
-		printf("--------+");
-	}
-	printf("\n");
-    printf(" |        |");
-	for(int i=0; i < n; i++)
-		printf("%4c    |", terminals[i]);
-	printf("%4c    |\n", '$');
-	printf(" +--------+");
-	for(int i=0; i <= n; i++){
-		printf("--------+");
-	}
-	printf("\n");
-
-}
 char* substring(char*, const char *, int, int);
 char** str_split(char*, const char);
 void str_append(char*, char);
