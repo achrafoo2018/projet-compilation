@@ -1,11 +1,7 @@
 CFLAGS := -Wall -g
-all: left_recursivity premier suivant table_LL1
+all: left_recursivity LL1_parser
 lr: left_recursivity.c
 	gcc $(CFLAGS) left_recursivity.c -o left_recursivity
-pr: premier.c
-	gcc $(CFLAGS) premier.c -o premier
-sv: suivant.c 
-	gcc $(CFLAGS) suivant.c -o suivant
-TLL1: table_LL1.c
-	gcc $(CFLAGS) table_LL1.c -o table_LL1
+TLL1: LL1_parser.c
+	gcc $(CFLAGS) LL1_parser.c -o LL1_parser
 
