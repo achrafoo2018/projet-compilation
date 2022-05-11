@@ -149,14 +149,11 @@ int main(int argc, char **argv)
 {
 	// longueur maximale de str est 100
 	while(true){
-
-            char str [100];
+		char str [100];	
         printf("donner une instruction: ");
-    fgets(str,100,stdin);
-    str[strcspn(str, "\n")] = 0; // supprimer \n
-	analyseur(str); //appel de l'analyseur
-
-}
-
+		fgets(str,100,stdin);
+		str[strcspn(str, "\n")] = 0; // supprimer \n
+		analyseur(str); //appel de l'analyseur
+	}
 	return (0);
 }
