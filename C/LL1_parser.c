@@ -47,10 +47,11 @@ int main(int argc, char **argv)
 	{
 		productions[i] = (char*) malloc(sizeof(char) *MAX);
 		scanf("%s", productions[i]);
-		char *non_terminal = (char*) malloc(sizeof(char) *3);
-		str_append(non_terminal, productions[i][0]);
-		if (productions[i][1] != '-')
-			str_append(non_terminal, productions[i][1]);
+		char non_terminal = productions[i][0];
+		if(non_terminal == productions[i][3]){
+			printf("Grammaire '\033[1m%s\033[0m' est récursive !!\n", productions[i]);
+			return 0;
+		}
 		substring(productions[i], productions[i], 3, strlen(productions[i]) - 3);
 		char **tokens = str_split(productions[i], '|');
 		if (tokens)
@@ -58,7 +59,7 @@ int main(int argc, char **argv)
 			for (int t = 0; *(tokens + t); t++)
 			{
 				char *tmp = (char*) malloc(sizeof(char) *MAX);
-				strcpy(tmp, non_terminal);
+				tmp[0] = non_terminal;
 				str_append(tmp, '=');
 				strcat(tmp, *(tokens + t));
 				production[num] = (char*) malloc(sizeof(char) *MAX);
@@ -67,14 +68,13 @@ int main(int argc, char **argv)
 		}
 	}
 	count = num;
-	int kay;
 	char done[count];
 	int ptr = -1;
 	for (k = 0; k < count; k++)
 	{
-		for (kay = 0; kay < 100; kay++)
+		for (int j = 0; j < 100; j++)
 		{
-			calc_first[k][kay] = '!';
+			calc_first[k][j] = '!';
 		}
 	}
 	int ptr1 = 0, ptr2, flag;
@@ -83,8 +83,8 @@ int main(int argc, char **argv)
 		c = production[k][0];
 		ptr2 = 0;
 		flag = 0;
-		for (kay = 0; kay <= ptr; kay++)
-			if (c == done[kay])
+		for (int j = 0; j <= ptr; j++)
+			if (c == done[j])
 				flag = 1;
 		if (flag == 1)
 			continue;
@@ -120,24 +120,24 @@ int main(int argc, char **argv)
 	ptr = -1;
 	for (k = 0; k < count; k++)
 	{
-		for (kay = 0; kay < 100; kay++)
+		for (int j = 0; j < 100; j++)
 		{
-			calc_follow[k][kay] = '!';
+			calc_follow[k][j] = '!';
 		}
 	}
 	ptr1 = 0;
-	int land = 0;
+	int nb_non_terminals = 0;
 	for (e = 0; e < count; e++)
 	{
 		nt = production[e][0];
 		ptr2 = 0;
 		flag = 0;
-		for (kay = 0; kay <= ptr; kay++)
-			if (nt == donee[kay])
+		for (int j = 0; j <= ptr; j++)
+			if (nt == donee[j])
 				flag = 1;
 		if (flag == 1)
 			continue;
-		land += 1;
+		nb_non_terminals += 1;
 		follow(nt);
 		ptr += 1;
 		donee[ptr] = nt;
@@ -175,7 +175,8 @@ int main(int argc, char **argv)
 	{
 		for (int kk = 0; kk < count; kk++)
 		{
-			if (!isupper(production[k][kk]) && production[k][kk] != '#' && production[k][kk] != '=' && production[k][kk] != '\0')
+			if (!isupper(production[k][kk]) && production[k][kk] != '#' &&
+				 production[k][kk] != '=' && production[k][kk] != '\0')
 			{
 				flag = 0;
 				for (int pp = 0; pp < nb_terminals; pp++)
@@ -262,21 +263,21 @@ int main(int argc, char **argv)
 			}
 		}
 	}
-	char table[land][nb_terminals + 1];
+	char table[nb_non_terminals][nb_terminals + 1];
 	ptr = -1;
-	for (k = 0; k < land; k++)
+	for (k = 0; k < nb_non_terminals; k++)
 	{
-		for (kay = 0; kay < (nb_terminals + 1); kay++)
+		for (int j = 0; j < (nb_terminals + 1); j++)
 		{
-			table[k][kay] = '!';
+			table[k][j] = '!';
 		}
 	}
 	for (k = 0; k < count; k++)
 	{
 		nt = production[k][0];
 		flag = 0;
-		for (kay = 0; kay <= ptr; kay++)
-			if (nt == table[kay][0])
+		for (int j = 0; j <= ptr; j++)
+			if (nt == table[j][0])
 				flag = 1;
 		if (flag == 1)
 			continue;
@@ -319,13 +320,13 @@ int main(int argc, char **argv)
 	}
 	for (k = 0; k < nb_terminals; k++)
 	{
-		for (kay = 0; kay < 100; kay++)
+		for (int j = 0; j < 100; j++)
 		{
-			if (calc_first[k][kay] == '!')
+			if (calc_first[k][j] == '!')
 			{
 				break;
 			}
-			else if (calc_first[k][kay] == '#')
+			else if (calc_first[k][j] == '#')
 			{
 				int fz = 1;
 				while (calc_follow[k][fz] != '!')
@@ -348,7 +349,7 @@ int main(int argc, char **argv)
 			}
 		}
 	}
-	for (k = 0; k < land; k++)
+	for (k = 0; k < nb_non_terminals; k++)
 	{
 		printf("\t   %c\t|\t", table[k][0]);
 		for (int kk = 1; kk < (nb_terminals + 1); kk++)
@@ -356,10 +357,12 @@ int main(int argc, char **argv)
 			if (table[k][kk] == '!')
 				printf("\t\t");
 			else if (table[k][kk] == '#')
-				printf("%c=#\t\t", table[k][0]);
-			else
-			{
-				printf("%s\t\t", production[table[k][kk] - 'A']);
+				printf("%c->#\t\t", table[k][0]);
+			else{
+				char nt = production[table[k][kk] - 65][0];
+				char *tmp = (char *)malloc(sizeof(char) * MAX);
+				substring(tmp, production[table[k][kk] - 65], 2, strlen(production[table[k][kk] - 65]) - 1);
+				printf("%c->%s\t\t",nt , tmp);
 			}
 		}
 		printf("\n");
@@ -423,13 +426,13 @@ int main(int argc, char **argv)
 				exit(0);
 			}
 			char produ[MAX];
-			for (j = 0; j < land; j++)
+			for (j = 0; j < nb_non_terminals; j++)
 			{
 				if (stk == table[j][0])
 				{
 					if (table[j][i + 1] == '#')
 					{
-						printf("%c=#\n", table[j][0]);
+						printf("%c->#\n", table[j][0]);
 						produ[0] = '#';
 						produ[1] = '\0';
 					}
@@ -437,7 +440,9 @@ int main(int argc, char **argv)
 					{
 						int mum = table[j][i + 1] - 'A';
 						strcpy(produ, production[mum]);
-						printf("%s\n", produ);
+						char *tmp = (char *)malloc(sizeof(char) * MAX);
+						substring(tmp, produ, 2, strlen(produ) - 1);
+						printf("%c->%s\n", produ[0], tmp);
 					}
 					else
 					{
@@ -465,7 +470,7 @@ int main(int argc, char **argv)
 			{
 				if (stk == production[j][0] && production[j][2] == '#')
 				{
-					printf("%c=#\n", production[j][0]);
+					printf("%c->#\n", production[j][0]);
 					produ[0] = '#';
 					produ[1] = '\0';
 					break;
@@ -531,6 +536,7 @@ void follow(char c)
 	}
 }
 
+
 void findFirst(char c, int q1, int q2)
 {
 	int j;
@@ -564,6 +570,7 @@ void findFirst(char c, int q1, int q2)
 		}
 	}
 }
+
 
 void followFirst(char c, int c1, int c2)
 {
@@ -599,6 +606,7 @@ void followFirst(char c, int c1, int c2)
 	}
 }
 
+
 char *substring(char *destination, const char *source, int beg, int n)
 {
 	while (n > 0)
@@ -611,6 +619,7 @@ char *substring(char *destination, const char *source, int beg, int n)
 	*destination = '\0';
 	return destination;
 }
+
 
 char **str_split(char *a_str, const char a_delim)
 {
@@ -658,12 +667,14 @@ char **str_split(char *a_str, const char a_delim)
 	return result;
 }
 
+
 void str_append(char *s, char c)
 {
 	int len = strlen(s);
 	s[len] = c;
 	s[len + 1] = '\0';
 }
+
 
 int in_array(char *array, char c, int n)
 {
@@ -674,3 +685,4 @@ int in_array(char *array, char c, int n)
 	}
 	return 0;
 }
+

@@ -1,6 +1,6 @@
 5
 E->TX
-X->+TX|#
+X->#|+TX
 T->FZ
 Z->*FZ|#
 F->(E)|x
