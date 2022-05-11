@@ -1,0 +1,7 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/kenzu/projet-compilation/D/partie4'
+bison -d bison.y 
+flex flex.l
+gcc bison.tab.c  
+make: Leaving directory '/home/kenzu/projet-compilation/D/partie4'
+ 
