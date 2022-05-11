@@ -383,13 +383,13 @@ int main(int argc, char **argv)
 	while (s_ptr != 0)
 	{
 		printf("\t\t");
-		int vamp = 0;
-		for (vamp = 0; vamp <= s_ptr; vamp++)	// print stack values
-			printf("%c", stack[vamp]);
+		int sp = 0;
+		for (sp = 0; sp <= s_ptr; sp++)	// print stack values
+			printf("%c", stack[sp]);
 		printf("\t\t\t");
-		vamp = i_ptr;
-		while (input[vamp] != '\0')
-			printf("%c", input[vamp++]);
+		sp = i_ptr;
+		while (input[sp] != '\0')
+			printf("%c", input[sp++]);
 		printf("\t\t\t");
 		char inp = input[i_ptr];
 		char stk = stack[s_ptr--];
