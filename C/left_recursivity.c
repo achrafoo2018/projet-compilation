@@ -14,7 +14,6 @@ int main () {
     char non_terminal;  
     int num;  
     char* production[MAX];  
-    int index = 3; /* starting of the string following "->" */  
     printf("Donner le nombre de production : ");  
     scanf("%d",&num);  
     printf("Donner la grammaire comme suit : NT->..|... :\n");
@@ -27,7 +26,7 @@ int main () {
     for(int i=0;i<num;i++){  
         printf("\nGrammaire : %s",production[i]);  
         non_terminal = production[i][0];  
-        substring(production[i], production[i], index, strlen(production[i])-3);
+        substring(production[i], production[i], 3, strlen(production[i])-3);
         char** tokens = str_split(production[i], '|');
         int isLeftRecursive = 0; 
         char* betas[MAX];
@@ -48,7 +47,7 @@ int main () {
         }
         if(isLeftRecursive) {  // there is left recursivity
             printf(" est recursive a gauche.\n");  
-            if(m == 0){ // ma fammach Beta 
+            if(m == 0){ // no Beta found 
                 printf("Grammaire ne peut pas être réduit!\n");
                 continue;
             }
@@ -67,7 +66,6 @@ int main () {
         }  
         else  
             printf(" n'est pas recursive a gauche\n");  
-        index=3;  
     }  
     return 0;
 }   

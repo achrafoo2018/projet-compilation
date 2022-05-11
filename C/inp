@@ -1,6 +1,7 @@
-4
-S->ABC
-A->aA|#
-B->bB|cB|#
-C->dC|c
-abcm
+5
+E->TX
+X->#|+TX
+T->FZ
+Z->*FZ|#
+F->(E)|x
+x+x*x

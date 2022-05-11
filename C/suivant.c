@@ -7,11 +7,11 @@
 
 
 // Functions to calculate Follow
-void followfirst(char, int, int);
+void followFirst(char, int, int);
 void follow(char c);
 
 // Function to calculate First
-void findfirst(char, int, int);
+void findFirst(char, int, int);
 char* substring(char*, const char *, int, int);
 char** str_split(char*, const char);
 void str_append(char*, char);
@@ -93,7 +93,7 @@ int main(int argc, char **argv){
 			continue;
 		
 		// Function call
-		findfirst(c, 0, 0);
+		findFirst(c, 0, 0);
 		ptr += 1;
 		
 		// Adding c to the calculated list
@@ -165,10 +165,7 @@ int main(int argc, char **argv){
 			}
 			if(chk == 0){
 				printf("%c", f[i]);
-				if(i < n-1)
-                    printf(", ");
-                else
-                    printf(" ");
+				printf(", ");
 				calc_follow[point1][point2++] = f[i];
 			}
 		}
@@ -195,7 +192,7 @@ void follow(char c){
 				if(production[i][j+1] != '\0'){
 					// Calculate the first of the next
 					// Non-Terminal in the production
-					followfirst(production[i][j+1], i, (j+2));
+					followFirst(production[i][j+1], i, (j+2));
 				}
 				if(production[i][j+1]=='\0' && c!=production[i][0]){
 					// Calculate the follow of the Non-Terminal
@@ -207,7 +204,7 @@ void follow(char c){
 	}
 }
 
-void findfirst(char c, int q1, int q2){
+void findFirst(char c, int q1, int q2){
 	int j;
 	
 	// The case where we
@@ -228,7 +225,7 @@ void findfirst(char c, int q1, int q2){
 				{
 					// Recursion to calculate First of New
 					// Non-Terminal we encounter after epsilon
-					findfirst(production[q1][q2], q1, (q2+1));
+					findFirst(production[q1][q2], q1, (q2+1));
 				}
 				else
 					first[n++] = '#';
@@ -242,13 +239,13 @@ void findfirst(char c, int q1, int q2){
 				// Recursion to calculate First of
 				// New Non-Terminal we encounter
 				// at the beginning
-				findfirst(production[j][2], j, 3);
+				findFirst(production[j][2], j, 3);
 			}
 		}
 	}
 }
 
-void followfirst(char c, int c1, int c2){	
+void followFirst(char c, int c1, int c2){	
 	// The case where we encounter
 	// a Terminal
 	if(!(isupper(c)))
@@ -283,7 +280,7 @@ void followfirst(char c, int c1, int c2){
 				{
 					// Recursion to the next symbol
 					// in case we encounter a "#"
-					followfirst(production[c1][c2], c1, c2+1);
+					followFirst(production[c1][c2], c1, c2+1);
 				}
 			}
 			j++;

@@ -18,8 +18,8 @@ void str_append(char*, char);
 
 #define MAX 100
 
-void followfirst(char , int , int);
-void findfirst(char , int , int);
+void followFirst(char , int , int);
+void findFirst(char , int , int);
 void follow(char c);
 
 int count,n=0;
@@ -42,7 +42,6 @@ int main(int argc,char **argv)
 	char c,ch;
 	count = 8;
 	
-	// The Input grammar
     printf("Donner le nombre de production : ");  
     scanf("%d",&count);  
     printf("Donner la grammaire comme suit (epsilon = #) : NT->..|... :\n");
@@ -77,8 +76,7 @@ int main(int argc,char **argv)
 		}
 	}
 	int point1 = 0,point2,flag;
-	for(k=0;k<count;k++)
-	{
+	for(k=0;k<count;k++){
 		c=production[k][0];
 		point2 = 0;
 		flag = 0;
@@ -87,15 +85,15 @@ int main(int argc,char **argv)
 				flag = 1;
 		if (flag == 1)
 			continue;
-		findfirst(c,0,0);
+		findFirst(c,0,0);
 		ptr+=1;
 		done[ptr] = c;
 		printf("\n\033[1m Premier(%c)\033[0m= { ",c);
 		calc_first[point1][point2++] = c;
 		for(i=0+jm;i<n;i++){
-			int lark = 0,chk = 0;
-  			for(lark=0;lark<point2;lark++){
-  				if (first[i] == calc_first[point1][lark]){
+			int j = 0,chk = 0;
+  			for(j=0;j<point2;j++){
+  				if (first[i] == calc_first[point1][j]){
   					chk = 1;
   					break;
 				}
@@ -136,9 +134,9 @@ int main(int argc,char **argv)
   		printf("\033[1m Suivant(%c)\033[0m = { ",ck);
   		calc_follow[point1][point2++] = ck;
   		for(i=0+km;i<m;i++){
-  			int lark = 0,chk = 0;
-  			for(lark=0;lark<point2;lark++){
-  				if (f[i] == calc_follow[point1][lark]){
+  			int j = 0,chk = 0;
+  			for(j=0;j<point2;j++){
+  				if (f[i] == calc_follow[point1][j]){
   					chk = 1;
   					break;
 				}
@@ -177,7 +175,7 @@ int main(int argc,char **argv)
 	printf("\n\t+===================================================================================================================+\n");	
 	printf("\t|\t\t\t\t\t\t\033[1mTable LL(1)\033[0m  \t\t\t\t\t\t\t    |");
 	printf("\n\t+=======+===========================================================================================================+\n");
-	printf("\t\t|\t");
+	printf("\t|\t|\t");
 	for(ap = 0;ap < sid; ap++){
 		printf("\033[1m%c\033[0m\t\t",ter[ap]);
 	}
@@ -308,9 +306,7 @@ int main(int argc,char **argv)
 			else if(table[ap][kay] == '#')
 				printf("%c=#\t\t",table[ap][0]);
 			else{
-				int mum = (int)(table[ap][kay]);
-				mum -= 65;
-				printf("%s\t\t",production[mum]);
+				printf("%s\t\t",production[table[ap][kay]-'A']);
 			}
 		}
 		printf("\n");
@@ -356,6 +352,12 @@ int main(int argc,char **argv)
 			for(i=0; i < sid; i++){
 				if(ter[i] == inp)
 					break;
+			}
+			if(i == sid){ // if input is not found in terminals
+				printf("\n\t===========================================================================\n");
+				printf("\t\t\t\tLe mot \033[1m'%s'\033[0m n'est pas accepté !!\n", input);
+				printf("\t===========================================================================\n\n\n");
+				exit(0);
 			}
 			char produ[MAX];
 			for(j=0;j < land; j++){
@@ -437,7 +439,7 @@ void follow(char c){
    			if(production[i][j]==c)
    			{
     			if(production[i][j+1]!='\0'){
-					followfirst(production[i][j+1],i,(j+2));
+					followFirst(production[i][j+1],i,(j+2));
  				}
     			if(production[i][j+1]=='\0'&&c!=production[i][0]){
      				follow(production[i][0]);
@@ -447,7 +449,7 @@ void follow(char c){
  	}
 }
 
-void findfirst(char c ,int q1 , int q2)
+void findFirst(char c ,int q1 , int q2)
 {
 	int j;
 	if(!(isupper(c))){
@@ -462,7 +464,7 @@ void findfirst(char c ,int q1 , int q2)
 					first[n++]='#';
 				else if(production[q1][q2] != '\0' && (q1 != 0 || q2 != 0))
 				{
-					findfirst(production[q1][q2], q1, (q2+1));
+					findFirst(production[q1][q2], q1, (q2+1));
 				}
 				else
 					first[n++]='#';
@@ -471,13 +473,13 @@ void findfirst(char c ,int q1 , int q2)
 				first[n++]=production[j][2];
 			}
 			else {
-				findfirst(production[j][2], j, 3);
+				findFirst(production[j][2], j, 3);
 			}
 		}
 	}	
 }
 
-void followfirst(char c, int c1 , int c2){
+void followFirst(char c, int c1 , int c2){
     if(!(isupper(c)))
 		f[m++]=c;
 	else{
@@ -497,7 +499,7 @@ void followfirst(char c, int c1 , int c2){
 					follow(production[c1][0]);
 				}
 				else{
-					followfirst(production[c1][c2],c1,c2+1);
+					followFirst(production[c1][c2],c1,c2+1);
 				}
 			}
 			j++;

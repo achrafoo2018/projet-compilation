@@ -8,7 +8,7 @@
 
 
 // Function to calculate First
-void findfirst(char, int, int);
+void findFirst(char, int, int);
 char* substring(char*, const char *, int, int);
 char** str_split(char*, const char);
 void str_append(char*, char);
@@ -60,6 +60,7 @@ int main(int argc, char **argv){
             }
         }
     }
+	
     count = num;
 	int kay;
 	char done[count];
@@ -71,11 +72,11 @@ int main(int argc, char **argv){
 			calc_first[k][kay] = '!';
 		}
 	}
-	int point1 = 0, point2, flag;
+	int ptr1 = 0, ptr2, flag;
 	
 	for(k = 0; k < count; k++){
 		c = production[k][0];
-		point2 = 0;
+		ptr2 = 0;
 		flag = 0;
 		
 		// Checking if First of c has
@@ -88,41 +89,39 @@ int main(int argc, char **argv){
 			continue;
 		
 		// Function call
-		findfirst(c, 0, 0);
+		findFirst(c, 0, 0);
 		ptr += 1;
 		
 		// Adding c to the calculated list
 		done[ptr] = c;
 		printf("\nPremier(%c) = { ", c);
-		calc_first[point1][point2++] = c;
+		calc_first[ptr1][ptr2++] = c;
 		
 		// Printing the First Sets of the grammar
-		for(i = 0 + jm; i < n; i++) {
-			int lark = 0, chk = 0;
+		for(i = jm; i < n; i++){
+			int j = 0, chk = 0;
 			
-			for(lark = 0; lark < point2; lark++) {
-				
-				if (first[i] == calc_first[point1][lark]){
+			for(j = 0; j < ptr2; j++){
+				if (first[i] == calc_first[ptr1][j]){
 					chk = 1;
 					break;
 				}
 			}
 			if(chk == 0){
 				printf("%c, ", first[i]);
-				calc_first[point1][point2++] = first[i];
+				calc_first[ptr1][ptr2++] = first[i];
 			}
 		}
 		printf("}\n");
 		jm = n;
-		point1++;
+		ptr1++;
 	}
 	printf("\n");
 }
 
 
-void findfirst(char c, int q1, int q2){
+void findFirst(char c, int q1, int q2){
 	int j;
-	
 	// The case where we
 	// encounter a Terminal
 	if(!(isupper(c))) {
@@ -137,7 +136,7 @@ void findfirst(char c, int q1, int q2){
 				else if(production[q1][q2] != '\0' && (q1 != 0 || q2 != 0)){
 					// Recursion to calculate First of New
 					// Non-Terminal we encounter after epsilon
-					findfirst(production[q1][q2], q1, (q2+1));
+					findFirst(production[q1][q2], q1, (q2+1));
 				}
 				else
 					first[n++] = '#';
@@ -149,7 +148,7 @@ void findfirst(char c, int q1, int q2){
 				// Recursion to calculate First of
 				// New Non-Terminal we encounter
 				// at the beginning
-				findfirst(production[j][2], j, 3);
+				findFirst(production[j][2], j, 3);
 			}
 		}
 	}
