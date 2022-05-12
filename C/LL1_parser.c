@@ -251,22 +251,16 @@ int main(int argc, char **argv)
 		for (pp = 0; pp < ct; pp++)
 		{
 			if (tem[pp] == '#')
-			{
 				kk = 1;
-			}
 			else if (tem[pp] == '_')
 			{
 				if (kk == 1)
-				{
 					kk = 0;
-				}
 				else
 					break;
 			}
 			else
-			{
 				first_prod[j][destiny++] = tem[pp];
-			}
 		}
 	}
 	char table[nb_non_terminals][nb_terminals + 1];
