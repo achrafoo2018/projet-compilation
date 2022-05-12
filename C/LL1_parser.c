@@ -48,12 +48,14 @@ int main(int argc, char **argv)
 		productions[i] = (char*) malloc(sizeof(char) *MAX);
 		scanf("%s", productions[i]);
 		char non_terminal = productions[i][0];
-		if(non_terminal == productions[i][3]){
-			printf("Grammaire '\033[1m%s\033[0m' est récursive !!\n", productions[i]);
+		if(!isupper(non_terminal) || productions[i][1] != '-' || productions[i][2] != '>' ){
+			printf("Grammaire '\033[1m%s\033[0m' est invalide !!\n", productions[i]);
 			return 0;
 		}
-		substring(productions[i], productions[i], 3, strlen(productions[i]) - 3);
-		char **tokens = str_split(productions[i], '|');
+		char *tmp = (char *) malloc(sizeof(char) *MAX);
+		strcpy(tmp, productions[i]);
+		substring(tmp, productions[i], 3, strlen(productions[i]) - 3);
+		char **tokens = str_split(tmp, '|');
 		if (tokens)
 		{
 			for (int t = 0; *(tokens + t); t++)
@@ -64,6 +66,11 @@ int main(int argc, char **argv)
 				strcat(tmp, *(tokens + t));
 				production[num] = (char*) malloc(sizeof(char) *MAX);
 				strcpy(production[num++], tmp);
+				if(non_terminal == tmp[2]){
+					printf("Grammaire '\033[1m%s\033[0m' est récursive a gauche!!\n", productions[i]);
+					return 0;
+				}
+
 			}
 		}
 	}
@@ -173,7 +180,7 @@ int main(int argc, char **argv)
 	int nb_terminals = 0;
 	for (k = 0; k < count; k++)
 	{
-		for (int kk = 0; kk < count; kk++)
+		for (int kk = 0; kk < strlen(production[k]); kk++)
 		{
 			if (!isupper(production[k][kk]) && production[k][kk] != '#' &&
 				 production[k][kk] != '=' && production[k][kk] != '\0')
@@ -181,7 +188,7 @@ int main(int argc, char **argv)
 				flag = 0;
 				for (int pp = 0; pp < nb_terminals; pp++)
 				{
-					if (production[k][kk] == terminals[pp]){// check if terminal already exists
+					if (production[k][kk] == terminals[pp]){ // check if terminal already exists
 						flag = 1;
 						break;
 					}
@@ -191,12 +198,11 @@ int main(int argc, char **argv)
 			}
 		}
 	}
-	terminals[nb_terminals] = '$';
-	nb_terminals++;
+	terminals[nb_terminals++] = '$';
 	printf("\n\t+===================================================================================================================+\n");
 	printf("\t|\t\t\t\t\t\t\033[1mTable LL(1)\033[0m  \t\t\t\t\t\t\t    |");
-	printf("\n\t+=======+===========================================================================================================+\n");
-	printf("\t|\t|\t");
+	printf("\n\t+===================================================================================================================+\n");
+	printf("\t\t|\t");
 	for (k = 0; k < nb_terminals; k++)
 	{
 		printf("\033[1m%c\033[0m\t\t", terminals[k]);
