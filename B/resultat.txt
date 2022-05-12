@@ -1,0 +1,7 @@
+ 000 : c'est un nombre binaire 
+
+ 0101 : c'est un nombre binaire 
+
+ 1110 : c'est un nombre binaire 
+
+014$_0 : ce n'est pas un nombre binaire 
